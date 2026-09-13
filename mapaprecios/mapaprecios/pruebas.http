@@ -42,3 +42,25 @@ GET http://localhost:8080/usuarios/1
 
 ### Buscar por email
 GET http://localhost:8080/usuarios/email/matias@mail.com
+
+### Crear reporte
+POST http://localhost:8080/reportes
+Content-Type: application/json
+
+{
+  "precio": 1850.00,
+  "vigente": true,
+  "puntuacion": 0,
+  "usuario": {"id": 1},
+  "producto": {"id": 1},
+  "comercio": {"id": 1}
+}
+
+### Buscar reporte por id
+GET http://localhost:8080/reportes/1
+
+### Buscar reportes por producto
+GET http://localhost:8080/reportes/productos/1
+
+### Marcar como dudoso
+PUT http://localhost:8080/reportes/1/dudoso

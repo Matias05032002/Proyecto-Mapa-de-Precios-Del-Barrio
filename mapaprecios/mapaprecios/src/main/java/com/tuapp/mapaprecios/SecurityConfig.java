@@ -19,6 +19,7 @@ public class SecurityConfig {
                         .requestMatchers("/productos/**").permitAll()
                         .requestMatchers("/comercios/**").permitAll()
                         .requestMatchers("/usuarios/**").permitAll()
+                        .requestMatchers("/reportes/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.disable())
