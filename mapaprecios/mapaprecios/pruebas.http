@@ -1,0 +1,44 @@
+### Guardar producto
+POST http://localhost:8080/productos
+Content-Type: application/json
+
+{
+  "nombre": "Aceite girasol",
+  "categoria": "Almacén",
+  "unidad": "900ml"
+}
+
+###  Listar todos
+GET http://localhost:8080/productos
+
+### Guardar comercio
+POST http://localhost:8080/comercios
+Content-Type: application/json
+
+{
+  "nombre": "Almacén Don Jorge",
+  "localidad": "Palermo",
+  "direccion": "Av. Santa Fe 1234",
+  "descripcion": "Almacén de barrio"
+}
+
+### Listar comercios
+GET http://localhost:8080/comercios
+
+### Registrar usuario
+POST http://localhost:8080/usuarios
+Content-Type: application/json
+
+{
+  "nombre": "Matias",
+  "apellido": "Lopez",
+  "email": "matias@mail.com",
+  "password": "123456",
+  "verificado": false
+}
+
+### Buscar por id
+GET http://localhost:8080/usuarios/1
+
+### Buscar por email
+GET http://localhost:8080/usuarios/email/matias@mail.com

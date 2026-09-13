@@ -1,6 +1,5 @@
 package com.tuapp.mapaprecios.modelo;
 
-
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,23 +7,21 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table (name = "Productos")
-@Data
 @NoArgsConstructor
+@Table(name ="Usuario")
+@Data
 
-public class Producto {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nombre;
-    private String categoria;
-    private String unidad;
-    private Double precio;
-    private String descripcion;
-    private String marca;
-    private LocalDateTime fechaDeSubida;
-    private Boolean disponible;
+    private String apellido;
+    private String email;
+    private String contrasena;
+    private Boolean verificado = false;
+    private LocalDateTime fechaDeIngreso;
 
 }
