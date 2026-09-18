@@ -13,22 +13,45 @@
 
   <!-- custom style -->
   <link rel="stylesheet" th:href="@{/css/main.css}" />
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 </head>
 
 <body>
+<nav th:replace="~{navbar :: navbar}"></nav>
 
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">UNLAM</a>
-  </nav>
-
-  <main role="main" class="container">
-    <div class="container">
-      <h1>Bienvenidos a Taller Web 1</h1>
-
-      <a href="login.html" class="btn btn-lg btn-primary btn-block">Volver</a>
+<main role="main" class="container">
+  <div class="text-center mt-5">
+    <h1 class="display-4 fw-bold">Mapa de Precios del Barrio</h1>
+    <p class="lead mt-3">
+      Los vecinos reportan los precios de los productos en los comercios del barrio.
+      Buscá antes de salir a comprar y ahorrá tiempo y plata.
+    </p>
+    <hr class="my-4">
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <div class="card-home">
+          <h4><i class="bi bi-search"></i> Buscá productos</h4>
+          <p>Encontrá el precio más barato en los comercios de tu barrio.</p>
+          <a href="/spring/producto" class="btn btn-primary">Ver productos</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-home">
+          <h4><i class="bi bi-shop"></i> Comercios</h4>
+          <p>Conocé los comercios del barrio y sus precios reportados.</p>
+          <a href="/spring/comercio" class="btn btn-primary">Ver comercios</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-home">
+          <h4><i class="bi bi-clipboard-plus"></i> Reportar precio</h4>
+          <p>Ayudá a tu comunidad reportando los precios que encontrás.</p>
+          <a href="/spring/reporte" class="btn btn-primary">Reportar</a>
+        </div>
+      </div>
     </div>
-  </main>
+  </div>
+</main>
   <!-- /.container -->
 
   <!-- Boostrap core js -->

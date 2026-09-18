@@ -80,4 +80,10 @@ public class ControladorLogin {
   public ModelAndView inicio() {
     return new ModelAndView("redirect:/login");
   }
+
+  @RequestMapping(path = "/logout", method = RequestMethod.GET)
+  public ModelAndView deslogueo(HttpServletRequest request) {
+    request.getSession().invalidate();
+    return new ModelAndView("redirect:/login");
+  }
 }

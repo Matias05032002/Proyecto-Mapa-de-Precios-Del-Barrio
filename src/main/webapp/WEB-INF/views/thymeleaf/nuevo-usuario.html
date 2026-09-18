@@ -29,9 +29,10 @@
         <form action="#" th:action="@{/registrarme}" method="POST" th:object="${usuario}">
           <h3 class="form-signin-heading">Nuevo Usuario</h3>
           <hr class="colorgraph"><br>
-
-          <input th:field="*{email}" id="email" class="form-control" required />
-          <input th:field="*{password}" type="password" id="password" class="form-control" required />
+          <input th:field="*{nombre}" id="nombre" class="form-control" placeholder="Nombre" required />
+          <input th:field="*{apellido}" id="apellido" class="form-control" placeholder="Apellido" required />
+          <input th:field="*{email}" id="email" class="form-control" placeholder="Email" required />
+          <input th:field="*{password}" type="password" id="password" class="form-control" placeholder="Contraseña" required />
 
           <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit">Registrarme</button>
           <p th:if="${error != null}" class="alert alert-danger" th:text="'Error ' + ${error}">
