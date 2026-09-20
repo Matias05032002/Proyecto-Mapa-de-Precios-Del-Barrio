@@ -33,4 +33,9 @@ public class ServicioLoginImpl implements ServicioLogin {
     usuario.setRol("USER");
     repositorioUsuario.guardar(usuario);
   }
+
+  @Override
+  public Usuario buscarPorEmail(String email) {
+    return repositorioUsuario.buscar(email);
+  }
 }

@@ -2,6 +2,8 @@ package com.tallerwebi.infraestructura;
 
 import com.tallerwebi.dominio.Reporte.Reporte;
 import com.tallerwebi.dominio.Reporte.RepositorioReporte;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.hibernate.SessionFactory;
@@ -65,5 +67,28 @@ public class RepositorioReporteImpl implements RepositorioReporte {
       .getCurrentSession()
       .createQuery("from Reporte order by precio asc", Reporte.class)
       .list();
+  }
+
+  @Override
+  public Reporte buscarReporteDuplicado(
+    Long usuarioId,
+    Long productoId,
+    Long comercioId,
+    LocalDate fecha
+  ) {
+    return sessionFactory
+      .getCurrentSession()
+      .createQuery(
+        "from Reporte where usuario.id = :usuarioId " +
+        "and producto.id = :productoId " +
+        "and comercio.id = :comercioId " +
+        "and cast(fechaDeReporte as date) = :fecha",
+        Reporte.class
+      )
+      .setParameter("usuarioId", usuarioId)
+      .setParameter("productoId", productoId)
+      .setParameter("comercioId", comercioId)
+      .setParameter("fecha", fecha)
+      .uniqueResult();
   }
 }

@@ -4,7 +4,9 @@ import com.tallerwebi.dominio.Comercio.Comercio;
 import com.tallerwebi.dominio.Comercio.ServicioComercio;
 import com.tallerwebi.dominio.Producto.Producto;
 import com.tallerwebi.dominio.Producto.ServicioProducto;
+import com.tallerwebi.dominio.excepcion.ReporteExistente;
 import jakarta.transaction.Transactional;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,7 @@ public class ServicioReporteImpl implements ServicioReporte {
   }
 
   @Override
-  public Reporte guardarReporte(Reporte reporte) {
+  public Reporte guardarReporte(Reporte reporte) throws ReporteExistente {
     Producto productoExistente = servicioProducto.buscarProductoPorNombreExacto(
       reporte.getProducto().getNombre()
     );
@@ -50,6 +52,20 @@ public class ServicioReporteImpl implements ServicioReporte {
     }
 
     reporte.setFechaDeReporte(LocalDateTime.now());
+
+    if (reporte.getUsuario() != null) {
+      if (
+        repositorioReporte.buscarReporteDuplicado(
+          reporte.getUsuario().getId(),
+          reporte.getProducto().getId(),
+          reporte.getComercio().getId(),
+          reporte.getFechaDeReporte().toLocalDate()
+        ) !=
+        null
+      ) {
+        throw new ReporteExistente();
+      }
+    }
 
     return repositorioReporte.guardarReporte(reporte);
   }
@@ -72,5 +88,15 @@ public class ServicioReporteImpl implements ServicioReporte {
   @Override
   public List<Reporte> listarTodos() {
     return repositorioReporte.listarTodos();
+  }
+
+  @Override
+  public Reporte buscarReporteDuplicado(
+    Long usuarioId,
+    Long productoId,
+    Long comercioId,
+    LocalDate fecha
+  ) {
+    return repositorioReporte.buscarReporteDuplicado(usuarioId, productoId, comercioId, fecha);
   }
 }
