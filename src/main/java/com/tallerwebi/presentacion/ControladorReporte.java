@@ -7,6 +7,7 @@ import com.tallerwebi.dominio.Reporte.ServicioReporte;
 import com.tallerwebi.dominio.RepositorioUsuario;
 import com.tallerwebi.dominio.ServicioLogin;
 import com.tallerwebi.dominio.Usuario;
+import com.tallerwebi.dominio.excepcion.PrecioIncorrecto;
 import com.tallerwebi.dominio.excepcion.ReporteExistente;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -44,14 +45,24 @@ public class ControladorReporte {
   @RequestMapping(method = RequestMethod.POST)
   public ModelAndView guardarReporte(@ModelAttribute Reporte reporte, HttpServletRequest request) {
     try {
+      if (reporte.getPrecio() == null || reporte.getPrecio() <= 0) {
+        throw new PrecioIncorrecto();
+      }
       String email = (String) request.getSession().getAttribute("EMAIL");
       Usuario usuario = servicioLogin.buscarPorEmail(email);
       reporte.setUsuario(usuario);
       servicioReporte.guardarReporte(reporte);
+    } catch (PrecioIncorrecto e) {
+      ModelAndView mav = new ModelAndView(VISTA_REPORTES);
+      mav.addObject("error", "El precio debe ser mayor a cero");
+      mav.addObject(VISTA_REPORTES, servicioReporte.listarTodos());
+      mav.addObject("productos", servicioProducto.listarTodos());
+      mav.addObject("comercios", servicioComercio.listarTodos());
+      return mav;
     } catch (ReporteExistente e) {
       ModelAndView mav = new ModelAndView(VISTA_REPORTES);
       mav.addObject("error", "Ya reportaste este precio hoy");
-      mav.addObject("reportes", servicioReporte.listarTodos());
+      mav.addObject(VISTA_REPORTES, servicioReporte.listarTodos());
       mav.addObject("productos", servicioProducto.listarTodos());
       mav.addObject("comercios", servicioComercio.listarTodos());
       return mav;
@@ -63,7 +74,7 @@ public class ControladorReporte {
   public ModelAndView buscarReporte(@PathVariable Long id) {
     Reporte reporte = servicioReporte.buscarReporte(id);
     ModelAndView mav = new ModelAndView(VISTA_REPORTES);
-    mav.addObject("reportes", reporte);
+    mav.addObject(VISTA_REPORTES, reporte);
     return mav;
   }
 
