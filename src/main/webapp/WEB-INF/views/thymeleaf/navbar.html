@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="/spring">Mapa de Precios</a>
+        <div class="navbar-nav ms-auto">
+            <a class="nav-link" href="/spring/producto">Productos</a>
+            <a class="nav-link" href="/spring/comercio">Comercios</a>
+            <a class="nav-link" href="/spring/reporte">Reportes</a>
+            <a th:if="${session['ROL'] == null}" class="nav-link" href="/spring/login">Iniciar sesión</a>
+            <a th:if="${session['ROL'] == null}" class="nav-link" href="/spring/nuevo-usuario">Registrarse</a>
+            <a th:if="${session['ROL'] != null}" class="nav-link" href="/spring/logout">Cerrar sesión</a>
+        </div>
+    </div>
+</nav>
+</body>
+</html>
