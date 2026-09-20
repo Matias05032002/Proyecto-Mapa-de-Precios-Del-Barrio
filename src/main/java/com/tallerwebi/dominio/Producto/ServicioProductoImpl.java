@@ -35,4 +35,9 @@ public class ServicioProductoImpl implements ServicioProducto {
   public List<Producto> buscarPorNombre(String nombre) {
     return repositorioProducto.buscarPorNombre(nombre);
   }
+
+  @Override
+  public Producto buscarProductoPorNombreExacto(String nombre) {
+    return repositorioProducto.buscarProductoPorNombreExacto(nombre);
+  }
 }

@@ -6,4 +6,5 @@ public interface ServicioComercio {
   Comercio guardarComercio(Comercio comercio);
   List<Comercio> listarTodos();
   Comercio buscarComercio(Long id);
+  Comercio buscarComercioPorNombre(String nombre);
 }

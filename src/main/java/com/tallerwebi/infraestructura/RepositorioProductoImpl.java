@@ -41,4 +41,13 @@ public class RepositorioProductoImpl implements RepositorioProducto {
       .setParameter("nombre", "%" + nombre + "%")
       .list();
   }
+
+  @Override
+  public Producto buscarProductoPorNombreExacto(String nombre) {
+    return sessionFactory
+      .getCurrentSession()
+      .createQuery("from Producto where nombre = :nombre", Producto.class)
+      .setParameter("nombre", nombre)
+      .uniqueResult();
+  }
 }

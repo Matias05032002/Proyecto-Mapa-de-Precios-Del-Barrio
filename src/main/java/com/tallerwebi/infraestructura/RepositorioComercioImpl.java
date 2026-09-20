@@ -32,4 +32,13 @@ public class RepositorioComercioImpl implements RepositorioComercio {
   public Comercio buscarComercio(Long id) {
     return sessionFactory.getCurrentSession().get(Comercio.class, id);
   }
+
+  @Override
+  public Comercio buscarComercioPorNombre(String nombre) {
+    return sessionFactory
+      .getCurrentSession()
+      .createQuery("from Comercio where nombre = :nombre", Comercio.class)
+      .setParameter("nombre", nombre)
+      .uniqueResult();
+  }
 }

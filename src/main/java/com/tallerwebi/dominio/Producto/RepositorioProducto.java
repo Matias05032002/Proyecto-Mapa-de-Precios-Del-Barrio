@@ -7,4 +7,5 @@ public interface RepositorioProducto {
   List<Producto> listarTodos();
   Producto buscarProductoPorId(Long id);
   List<Producto> buscarPorNombre(String nombre);
+  Producto buscarProductoPorNombreExacto(String nombre);
 }

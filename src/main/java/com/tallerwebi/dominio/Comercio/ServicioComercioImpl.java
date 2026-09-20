@@ -31,4 +31,9 @@ public class ServicioComercioImpl implements ServicioComercio {
   public Comercio buscarComercio(Long id) {
     return repositorioComercio.buscarComercio(id);
   }
+
+  @Override
+  public Comercio buscarComercioPorNombre(String nombre) {
+    return repositorioComercio.buscarComercioPorNombre(nombre);
+  }
 }

@@ -33,8 +33,19 @@ public class RepositorioReporteImpl implements RepositorioReporte {
   public List<Reporte> buscarPorPorducto(Long productoId) {
     return sessionFactory
       .getCurrentSession()
-      .createQuery("from Reporte where producto.id = :productoId", Reporte.class)
+      .createQuery(
+        "from Reporte where producto.id = :productoId order by precio asc",
+        Reporte.class
+      )
       .setParameter("productoId", productoId)
+      .list();
+  }
+
+  @Override
+  public List<Reporte> buscarPorNombre(String nombreProducto) {
+    return sessionFactory
+      .getCurrentSession()
+      .createQuery("from Reporte where producto.nombre like :nombreProducto order by precio asc")
       .list();
   }
 
@@ -50,6 +61,9 @@ public class RepositorioReporteImpl implements RepositorioReporte {
 
   @Override
   public List<Reporte> listarTodos() {
-    return sessionFactory.getCurrentSession().createQuery("from Reporte", Reporte.class).list();
+    return sessionFactory
+      .getCurrentSession()
+      .createQuery("from Reporte order by precio asc", Reporte.class)
+      .list();
   }
 }
